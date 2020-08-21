@@ -11,7 +11,7 @@ elasticsearch.hosts: [ "http://127.0.0.1:9200" ]
 #汉化界面
 i18n.locale: "zh-CN"
 
-xpack.security.enabled: true
-elasticsearch.username: "elastic"
-elasticsearch.password: "KmjsFClkFnKHyMPgBKuq"
-xpack.monitoring.ui.container.elasticsearch.enabled: true
+#xpack.security.enabled: true
+#elasticsearch.username: "elastic"
+#elasticsearch.password: "KmjsFClkFnKHyMPgBKuq"
+#xpack.monitoring.ui.container.elasticsearch.enabled: true
