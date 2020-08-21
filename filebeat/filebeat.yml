@@ -1,0 +1,72 @@
+# IP地址为收集日志服务器的IP地址
+filebeat.inputs:
+- type: log
+  enabled: true
+  fields:
+         tag: tk_ng_log
+  paths:
+    # 要发送的log文件, 这里可随意设置  挂载的时候要对应
+    - /home/nginx/*.log
+  #multiline.pattern: '^[[:space:]]+(at|\.{3})\b|^Caused by:'
+  #multiline.negate: false
+  #multiline.match: after
+
+- type: log
+  enabled: true
+  fields:
+         tag: tk_test
+  paths:
+    # 要发送的log文件, 这里可随意设置  挂载的时候要对应
+    - /home/tbklogs/testtt/*/*/*.log
+
+- type: log
+  enabled: true
+  fields:
+         tag: tkname
+  paths:
+    # 要发送的log文件, 这里可随意设置  挂载的时候要对应
+    - /home/tbklogs/tktest/*/*/*.log
+
+- type: log
+  enabled: true
+  fields:
+         tag: tk_test2
+  paths:
+    # 要发送的log文件, 这里可随意设置  挂载的时候要对应
+    - /home/tbklogs/testtt2/*/*/*.log
+ 
+logging.level: debug
+ 
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+ 
+setup.template.settings:
+  index.number_of_shards: 1
+ 
+setup.dashboards.enabled: false
+ 
+setup.kibana:
+  host: "http://106.55.165.209:5601"
+
+  # 不直接传输至ES
+#output.elasticsearch:
+# hosts: ["http://es-master:9200"]
+# index: "filebeat-%{[beat.version]}-%{+yyyy.MM.dd}"
+ 
+output.logstash:
+  hosts: ["106.55.165.209:5044"]
+  username: "elastic"
+  password: "KmjsFClkFnKHyMPgBKuq"
+
+#scan_frequency: 1s
+
+close_inactive: 12h
+backoff: 1s
+max_backoff: 1s
+backoff_factor: 1
+flush.timeout: 1s
+ 
+processors:
+  - add_host_metadata: ~
+  - add_cloud_metadata: ~

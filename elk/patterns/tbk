@@ -1,0 +1,2 @@
+LINEORSPACE (\\n)|(%{SPACE})|(\\n%{SPACE})
+ANYWORD [\s\S]+
